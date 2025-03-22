@@ -10,7 +10,7 @@ namespace Parky_API.Repository.IRepository
 
 
         bool NationalParkExist(string name);
-        bool NtionalParkExist(int id);
+        bool NationalParkExist(int id);
         bool CreateNationalPark(NationalPark nationalPark);
         bool UpdateNationalPark(NationalPark nationalPark);
         bool DeleteNationalPark(NationalPark nationalPark);

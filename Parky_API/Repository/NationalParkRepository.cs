@@ -48,7 +48,7 @@ namespace Parky_API.Repository
         
         }
 
-        public bool NtionalParkExist(int id)
+        public bool NationalParkExist(int id)
         {
 
             bool value = _db.NationalPark.Any(a => a.Id == id);
