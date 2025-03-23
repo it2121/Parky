@@ -9,6 +9,8 @@ namespace Parky_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "Trails")]
+
     public class TrailsController : Controller
     {
         private ITrailRepository _trailRepo;
@@ -59,6 +61,28 @@ namespace Parky_API.Controllers
             return Ok(objDto);
         }
 
+        [HttpGet("[action]/{nationalParkId:int}", Name = "GetTrailsInNationalPark")]
+
+        public IActionResult GetTrailsInNationalPark(int nationalParkId)
+        {
+
+            var objList = _trailRepo.GetTrailsInNationalPark(nationalParkId);
+
+            if (objList == null) { return NotFound(); }
+            var objDtoList = new List<TrailDto>();
+            foreach (var obj in objList) {
+                 objDtoList.Add (_mapper.Map<TrailDto>(obj));
+
+
+            }
+
+
+
+
+
+
+            return Ok(objDtoList);
+        }
 
         [HttpPost]
 

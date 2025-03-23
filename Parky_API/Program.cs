@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Parky_API.Data;
 using Parky_API.ParkyMapper;
 using Parky_API.Repository;
@@ -12,7 +13,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // Space
+    c.SwaggerDoc("NatonalParks",
+        new OpenApiInfo { Title = "NatonalParks Api", Version = "v1" });
+
+    // Access
+    c.SwaggerDoc("Trails",
+        new OpenApiInfo { Title = "Trails Api", Version = "v1" });
+
+}
+
+    );
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefalutConnection")) 
     ) ;
@@ -32,7 +45,17 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(
+        options =>
+        {
+
+            options.ShowCommonExtensions();
+
+            options.SwaggerEndpoint("NatonalParks/swagger.json", "NatonalParks");
+            options.SwaggerEndpoint("Trails/swagger.json", "Trails Api");
+        }
+        
+        );
 }
 
 app.UseHttpsRedirection();
