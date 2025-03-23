@@ -19,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 
 builder.Services.AddScoped<INationalParkRepository, NationalParkRepository>();
+builder.Services.AddScoped<ITrailRepository, TrailRepository>();
 builder.Services.AddAutoMapper(typeof(ParkyMappings));
 
 
