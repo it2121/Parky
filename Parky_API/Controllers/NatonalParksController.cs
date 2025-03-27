@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Parky_API.Models;
@@ -11,7 +12,7 @@ namespace Parky_API.Controllers
     [ApiController]
     [ApiExplorerSettings(GroupName = "NatonalParks")]
 
-    public class NatonalParksController : Controller
+    public class NatonalParksController : ControllerBase
     {
         private INationalParkRepository _npRepo;
         private readonly IMapper _mapper;
@@ -42,6 +43,7 @@ namespace Parky_API.Controllers
 
 
         [HttpGet("{nationalParkId:int}", Name = "GetNationalPark")]
+        [Authorize]
 
         public IActionResult GetNatonalPark(int nationalParkId)
         {
