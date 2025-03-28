@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Parky_API.Models;
@@ -42,7 +43,7 @@ namespace Parky_API.Controllers
 
 
         [HttpGet("{TrailId:int}", Name = "GetTrail")]
-
+        [Authorize(Roles ="Admin")]
         public IActionResult GetTrail(int TrailId)
         {
 

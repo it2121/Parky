@@ -40,7 +40,8 @@ namespace Parky_API.Repository
                 Subject = new ClaimsIdentity(new Claim[]
                 {
 
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.ToString())
 
 
                 }),
@@ -58,14 +59,38 @@ namespace Parky_API.Repository
 
         }
 
+
+
+
         public bool IsUniqueUser(string username)
         {
-            throw new NotImplementedException();
-        }
+
+            var user =  _db.Users.SingleOrDefault(x=>x.Username == username);
+            
+            if (user == null)
+            {
+
+                return true;   
+            }
+
+            return false;         }
 
         public User Register(string username, string password)
         {
-            throw new NotImplementedException();
+
+            User userObj = new User()
+            {
+                Username = username,
+                Password = password,
+                Role = "Admin"
+
+            };
+            _db.Users.Add(userObj);
+
+            _db.SaveChanges();
+            userObj.Password = "";
+
+            return userObj;
         }
     }
 }
