@@ -1,6 +1,4 @@
-Here’s a solid description for the **Parky API** repository:  
 
----
 
 # Parky API - Smart Parking Management Backend 🚗🔧  
 
