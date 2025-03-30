@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Parky_API.Models;
 using Parky_API.Models.Dtos;
 using Parky_API.Repository.IRepository;
+using System.Net;
 
 namespace Parky_API.Controllers
 {
@@ -43,7 +44,7 @@ namespace Parky_API.Controllers
 
 
         [HttpGet("{nationalParkId:int}", Name = "GetNationalPark")]
-        [Authorize]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
 
         public IActionResult GetNatonalPark(int nationalParkId)
         {
@@ -65,6 +66,7 @@ namespace Parky_API.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
 
         public IActionResult CreateNatonalPark([FromBody] NationalParkDto natonalParksDto){
 

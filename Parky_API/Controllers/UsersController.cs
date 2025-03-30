@@ -44,7 +44,7 @@ namespace Parky_API.Controllers
 
         [AllowAnonymous]
 
-        [HttpPost]
+        [HttpPost("Register")]
 
         public IActionResult Register([FromBody] AuthenticationModel model)
         {
